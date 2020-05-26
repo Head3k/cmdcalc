@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
- printf("%s", argv[1]);
+    printf("%s", argv[1]);
 
-  return 0;
+    return 0;
 }
