@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 		i++;                           //
 	}
 	
-	if ((array[i] != "+") && (array[i] != "-") && (array[i] != "*") && (array[i] != "/") && (array[i] != "(") && (array[i] != ")") && (array[i-1] != "+") && (array[i-1] != "-") && (array[i-1] != "*") && (array[i-1] != "/") && (array[i-1] != "(") && (array[i-1] != ")")){
+/*	if ((array[i] != "+") && (array[i] != "-") && (array[i] != "*") && (array[i] != "/") && (array[i] != "(") && (array[i] != ")") && (array[i-1] != "+") && (array[i-1] != "-") && (array[i-1] != "*") && (array[i-1] != "/") && (array[i-1] != "(") && (array[i-1] != ")")){
 		int digit_array[count]; int k = 0; i=0;
 		for (k=1;k<count;k++){       // char --> int   
 			switch(array [k]){      //
