@@ -4,23 +4,23 @@
 
 //Находим числа, преобразуем, нумеруем. Находим операторы, нумеруем. Вычисляем с соответствием номеров
 
-double string_rework(char **argv, int string_length)
+double string_rework(char *array_char, int array_count)
 {
     int z = 0, i, open_bracket = 0;
     char *string;
     string = malloc(sizeof(char) * 9000);
 
-    for (i = 0; argv[1][i] != '\0'; i++)
+    for (i = 0; array_char[i] != '\0'; i++)
     {
-        while (argv[1][i] == ' ')
+        while (array_char[i] == ' ')
         {
             i++;
         }
 
-        string[z] = argv[1][i];
+        string[z] = array_char[i];
         z++;
 
-        if (argv[1][i] == '(')
+        if (array_char[i] == '(')
         {
             open_bracket++;
         }

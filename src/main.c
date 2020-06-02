@@ -1,4 +1,4 @@
-//main -> analys -> CharToDigit -> calulation <-> calc ->output
+//main -> converter -> calulation <-> calc ->output
 
 #include <stdio.h>
 #include "include/converter.h"
@@ -6,9 +6,12 @@
 
 int main(int argc, char *argv[]) //Параметры функции main [] - для доступа к отдельным символам
 {                                //argc равно двум
-    int array_char = converter(argv);
+    char *array_char;
+    int array_count = counter(argv);
 
-    double result = string_rework(argv, array_char); //Из реворка в калкулэйшн
+    array_char = argv[1]; // Вывести в отдельную функцию
+
+    double result = string_rework(array_char, array_count); //Вычисления
     printf("\nРезультат - %.4f\n\n", result);
 
     return 0;

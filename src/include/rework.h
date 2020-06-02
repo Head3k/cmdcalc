@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 
-double string_rework(char **argv, int string_length);
+double string_rework(char *array_char, int string_length);
 
 #endif
