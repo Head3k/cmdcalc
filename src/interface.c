@@ -3,9 +3,9 @@
 int interface(char *argv[])
 {
 
-    int string_length;
-    string_length = strlen(argv[1]);
+    int array_char;
+    array_char = strlen(argv[1]);
     
 
-    return (string_length);
+    return (array_char);
 }

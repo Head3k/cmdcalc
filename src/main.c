@@ -8,8 +8,8 @@
 int main(int argc, char *argv[]) //Параметры функции main [] - для доступа к отдельным символам
 {                                //argc равно двум
     int error_check;
-    int string_length = interface(argv);
-    error_check = analys(argv, string_length);
+    int array_char = interface(argv);
+    error_check = analys(argv, array_char);
 
     if (error_check == 1)
     {
@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) //Параметры функции main [] - �
         return 1;
     }
 
-    double result = string_rework(argv, string_length); //Из реворка в калкулэйшн
+    double result = string_rework(argv, array_char); //Из реворка в калкулэйшн
     printf("\nРезультат - %.4f\n\n", result);
 
     return 0;
