@@ -1,11 +1,10 @@
-#include "include/interface.h"
+#include "include/converter.h"
 
-int interface(char *argv[])
+int converter(char *argv[])
 {
 
     int array_char;
     array_char = strlen(argv[1]);
     
-
     return (array_char);
 }
