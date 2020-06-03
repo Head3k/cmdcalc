@@ -11,8 +11,16 @@ build/src/main.o:src/main.c
 
 
 test:
+	@echo Example 1 ::
+	@echo ====================================
 	bin/./cmdcalc "(1.1-2)+3*(2.5*2)+10"
+	@echo
+	@echo Example 2 ::	
+	@echo =========================================
 	bin/./cmdcalc "600/(295-60-5-60+50-20)*5"
+	@echo 
+	@echo Example 3 ::
+	@echo ====================================
 	bin/./cmdcalc "-10-(56+44)/50*(2*3)"
 
 
