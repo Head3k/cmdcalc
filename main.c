@@ -9,9 +9,9 @@ int main(int argc, char *argv[])
     array_char = argv[1];          // copy string --> array_char    
 
 
-    delete_space(array_char);
+    delete_space(array_char);  // array without space
     check_brackets(array_char);
-    printf("%g\n", value(array_char)); // check value
+    printf("%g\n", calculation(array_char)); // check value
     return 0;
 }
 

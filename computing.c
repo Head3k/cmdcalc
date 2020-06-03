@@ -3,29 +3,29 @@
 #include <stdlib.h>                                 
 #include "computing.h"
  
-void delete_space(char *str)
+void delete_space(char *array)
 {
-    unsigned short i = 0, j = 0;
+    int i = 0, j = 0;
     
-    while ((*(str+i) = *(str + j++)) != '\0') {
-        if (*(str+i) != ' ') {
+    while ((*(array+i) = *(array + j++)) != '\0') {
+        if (*(array+i) != ' ') {
             i++;
         }
     }
 }
 
-void check_brackets(char *str)
+void check_brackets(char *array)
 {
-    unsigned short open = 0, close = 0;
+    int open = 0, close = 0;
     
-    while (*str) {
-        if (*str == '(') {
+    while (*array) {
+        if (*array == '(') {
             open++;
-        } else if (*str == ')') {
+        } else if (*array == ')') {
             close++;
         }
    
-        ++str;
+        ++array;
     }
   
     if (open != close) {
@@ -35,52 +35,52 @@ void check_brackets(char *str)
         
 }
 
-float value(char *str)
-{
-    unsigned short index = 0;
-
-    return plus_minus(str, &index);
+float calculation(char *array)                  // calculation
+{                                              
+    int index = 0;                            // index --> selected element
+                                             
+    return second_priority(array, &index);  // call '+' && '-'
 }
  
-float plus_minus(char *str, unsigned short *index)
-{
-    float value = muldiv(str, index);
+float second_priority(char *array, int *index)     // index --> selected element
+{                                                 
+    float result = first_priority(array, index); // call '*' && '/'
 
-    while (*(str + *index) == '+' || *(str + *index) == '-') {                            
-        switch (*(str + *index)) {
+    while (*(array + *index) == '+' || *(array + *index) == '-') {                            
+        switch (*(array + *index)) {
         case '+':
             ++*index;
-            value += muldiv(str, index);
+            result += first_priority(array, index);
             break;
 
         case '-':
             ++*index;
-            value -= muldiv(str, index);
+            result -= first_priority(array, index);
             break;
         }
     }
     
-    return value;
+    return result;
 }
  
-float muldiv(char *str, unsigned short *index)      
+float first_priority(char *array, int *index)      
 {
     float divider;
-    float value = power(str, index);
+    float result = brackets_priority(array, index);
 
-    while (*(str + *index) == '*' || *(str + *index) == '/') {                       
-        switch (*(str + *index)) {
+    while (*(array + *index) == '*' || *(array + *index) == '/') {                       
+        switch (*(array + *index)) {
         case '*':
             ++*index;
-            value *= power(str, index);
+            result *= brackets_priority(array, index);
             break;
 
         case '/':
             ++*index;
-            divider = power(str, index);
+            divider = brackets_priority(array, index);
             
             if (divider != 0) {                      
-                value /= divider;
+                result /= divider;
             } else {                        
                 printf("Division by zero is not defined\n");         
                 exit(-1);
@@ -90,77 +90,51 @@ float muldiv(char *str, unsigned short *index)
        }
     }
     
-    return value;
-}
-              
-float power(char *str, unsigned short *index)         
-{
-    float value = brackets_priority(str, index);
-
-    while (*(str + *index) == '^') {
-        switch (*(str + *index)) {
-        case '^':
-            ++*index;
-            value = pow(value, brackets_priority(str, index));         
-            break;
-        }
-    }
-    
-    return value;
+    return result;
 }
 
-float brackets_priority(char *str, unsigned short *index)    
+float brackets_priority(char *array, int *index)    
 {
-    float value;
+    float result;
 
-    if (*(str + *index) == '(') {                   
+    if (*(array + *index) == '(') {                   
         ++*index;
-        value = plus_minus(str, index);
+        result = second_priority(array, index);
         ++*index;
     } else {
-        value = number(str, index);  
+        result = digit(array, index);  
     }
     
-    return value;
+    return result;
 }
  
-float number(char *str, unsigned short *index)                     
+float digit(char *array, int *index)                     
 {
-    float value = 0;
+    float result = 0;
     float factor = 1;
-    short flag = 1;
+    short extra = 1;
 
-    while (*(str + *index) == '-') {                    
-        flag *= -1;
-        ++*index;
-    }
-
-    while (*(str + *index) >= 'a' && *(str + *index) <= 'z') {                      
-       printf("Incorrect input\n");
-       exit(-1);
-    }
-    
-    while (*(str + *index) >= '0' && *(str + *index) <= '9') {
-        value = 10 * value + (*(str + *index) - '0');
+    while (*(array + *index) == '-') {                    
+        extra *= -1;
         ++*index;
     }
     
-    if (*(str + *index) == ',') {
-        printf("Introduced \",\" but expected \".\"\n");
-        exit(-1);
+    while (*(array + *index) >= '0' && *(array + *index) <= '9') {
+        result = 10 * result + (*(array + *index) - '0');
+        ++*index;
     }
     
-    if ( *(str + *index) == '.') {
+    if ( *(array + *index) == '.') {
         ++*index;
                          
-        while (*(str + *index) >= '0' && *(str + *index) <= '9') { 
+        while (*(array + *index) >= '0' && *(array + *index) <= '9') { 
             factor *= 0.1;
-            value = value + (*(str + *index) - '0') * factor;
+            result = result + (*(array + *index) - '0') * factor;
             ++*index;
         }
     }
     
-    return value * flag;
+    return result * extra;
 }
 
 
