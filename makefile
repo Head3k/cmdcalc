@@ -25,4 +25,6 @@ test:
 
 
 clean:
-	rm -rf build/src/*.o build/test/*.o bin/cmdcalc
+	rm -rf build/test/*.o
+	rm -rf build/src/*.o 
+	rm -rf bin/cmdcalc
