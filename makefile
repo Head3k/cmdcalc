@@ -1,0 +1,20 @@
+all:main
+
+
+
+main:build/src/main.o build/src/computing.o
+	gcc -Wall build/src/main.o build/src/computing.o -o bin/cmdcalc -lm
+build/src/computing.o:src/computing.c
+	gcc -Wall -c src/computing.c -o build/src/computing.o
+build/src/main.o:src/main.c
+	gcc -Wall -c src/main.c -o build/src/main.o
+
+
+test:
+	bin/./cmdcalc "(1.1-2)+3*(2.5*2)+10"
+	bin/./cmdcalc "600/(295-60-5-60+50-20)*5"
+	bin/./cmdcalc "-10-(56+44)/50*(2*3)"
+
+
+clean:
+	rm -rf build/src/*.o build/test/*.o bin/cmdcalc
