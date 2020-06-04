@@ -1,27 +1,28 @@
-CC = gcc
-CFLAGS = -Wall -Werror
-CFLAGS_TEST = -I thirdparty -Wall -Werror
-EXECUTABLE = ./cmdcalc
-OBJECTS = ./build/main.o ./build/converter.o ./build/rework.o ./build/calculation.o
+all:main
 
-all: cmdcalc 
-.PHONY: clean
+main:build/src/main.o build/src/computing.o
+	gcc -Wall build/src/main.o build/src/computing.o -o bin/cmdcalc -lm
+build/src/computing.o:src/computing.c
+	gcc -Wall -c src/computing.c -o build/src/computing.o
+build/src/main.o:src/main.c
+	gcc -Wall -c src/main.c -o build/src/main.o
 
-$(EXECUTABLE): $(OBJECTS)
-		$(CC) $(CFLAGS) -o $@ $^
 
-./build/main.o: ./src/main.c
-		$(CC) $(CFLAGS) -o $@ -c $^
+test:
+	@echo Example 1 ::
+	@echo ====================================
+	bin/./cmdcalc "(1.1-2)+3*(2.5*2)+10"
+	@echo
+	@echo Example 2 ::	
+	@echo =========================================
+	bin/./cmdcalc "600/(295-60-5-60+50-20)*5"
+	@echo 
+	@echo Example 3 ::
+	@echo ====================================
+	bin/./cmdcalc "-10-(56+44)/50*(2*3)"
 
-./build/converter.o: ./src/converter.c
-		$(CC) $(CFLAGS) -o $@ -c $^
 
-./build/rework.o: ./src/rework.c
-		$(CC) $(CFLAGS) -o $@ -c $^
-
-./build/calculation.o: ./src/calculation.c
-		$(CC) $(CFLAGS) -o $@ -c $^
-
-clean: 
-		rm ./build/*.o
-		rm ./bin/*
+clean:
+	rm -rf build/test/*.o
+	rm -rf build/src/*.o 
+	rm -rf bin/cmdcalc
