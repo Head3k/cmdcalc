@@ -3,6 +3,7 @@ all:main
 
 
 main:build/src/main.o build/src/computing.o
+	gcc -Wall build/src/main.o build/src/computing.o -o bin/cmdcalc.exe -lm
 	gcc -Wall build/src/main.o build/src/computing.o -o bin/cmdcalc -lm
 build/src/computing.o:src/computing.c
 	gcc -Wall -c src/computing.c -o build/src/computing.o
